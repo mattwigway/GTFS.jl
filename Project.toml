@@ -1,0 +1,13 @@
+name = "GTFS"
+uuid = "55d01638-f41f-4520-a957-9ff9a0ad12ca"
+authors = ["Matt Bhagat-Conway <matt@indicatrix.org> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
