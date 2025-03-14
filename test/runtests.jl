@@ -1,6 +1,3 @@
-using GTFS
-using Test
+import TestItemRunner: @run_package_tests
 
-@testset "GTFS.jl" begin
-    # Write your tests here.
-end
+@run_package_tests
