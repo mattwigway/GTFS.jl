@@ -11,22 +11,11 @@ function prefix!(f::Feed, prefix)
 end
 
 function prefix!(table::DataFrame, prefix)
-    if "primary_key" ∈ metadatakeys(table) && metadata(table, "primary_key") ∈ names(table)
-        prefix!(table, metadata(table, "primary_key"), prefix)
+    rename = collect(filter(x -> endswith(x, "_id") && x != "direction_id", names(table)))
+    for col in rename
+        table[!, col] = map(x -> "$(prefix)$(x)", table[!, col])
     end
-
-    if "foreign_keys" ∈ metadatakeys(table)
-        for fkey in metadata(table, "foreign_keys")
-            if fkey ∈ names(table)
-                prefix!(table, fkey, prefix)
-            end
-        end
-    end
-
 end
 
-function prefix!(table::DataFrame, col, prefix)
-    table[!, col] = map(x -> "$(prefix)$(x)", table[!, col])
-end
-
+# no-op for tables that are not present
 prefix!(_::Missing, _) = nothing

@@ -1,7 +1,7 @@
 """
 Represents a GTFS Feed, basically as a collection of data frames.
 """
-struct Feed
+mutable struct Feed
     agency::DataFrame
     routes::DataFrame
     trips::DataFrame
@@ -14,3 +14,4 @@ struct Feed
     #additional_files::Dict{String, DataFrame}
 end
 
+Base.show(io::IO, f::Feed) = print(io, "GTFS.Feed($(join(f.agency.agency_name, ", ", " and ")); $(nrow(f.routes)) routes, $(nrow(f.stops)) stops, $(nrow(f.trips)) trips)")
